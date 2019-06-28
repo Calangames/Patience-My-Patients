@@ -22,13 +22,18 @@ public class Character : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     private float horizontalForce = 0f, horizontalAcceleration = 0f;
-    private bool selected = false, addedToList = false, dead = false, canJump = true, ridingElevator = false;
+    private bool mainCharacter = false, selected = false, addedToList = false, dead = false, canJump = true, ridingElevator = false;
     private int index = 0;
     private WaitForSeconds timer = new WaitForSeconds(0.3f);
 
     public void AddedToList(bool value)
     {
         addedToList = value;
+    }
+
+    public void MainCharacter(bool value)
+    {
+        mainCharacter = value;
     }
 
     public void Selected(bool value)
@@ -175,22 +180,32 @@ public class Character : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (selected && other.CompareTag("Lever"))
+        if (selected)
         {
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
             {
-                GameController.instance.ActivateLever(other.GetComponent<Lever>().GetInstanceID());
-            }
-            return;
-        }
-        if (selected && other.CompareTag("Elevator"))
-        {
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
-            {
-                if (!ridingElevator)
+                if (other.CompareTag("Lever"))
                 {
-                    ridingElevator = true;
-                    other.GetComponent<Elevator>().Fade();
+                    GameController.instance.ActivateLever(other.GetComponent<Lever>().GetInstanceID());
+                }
+                else if (other.CompareTag("Elevator"))
+                {
+                    if (!ridingElevator)
+                    {
+                        ridingElevator = true;
+                        other.GetComponent<Elevator>().Fade();
+                    }
+                }
+                else if (other.CompareTag("Exit"))
+                {
+                    if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
+                    {
+                        if (!ridingElevator)
+                        {
+                            ridingElevator = true;
+                            EndingController.instance.End();
+                        }
+                    }
                 }
             }
         }
@@ -232,7 +247,15 @@ public class Character : MonoBehaviour
     {
         dead = true;
         Selected(false);
-        GameController.instance.RemoveCharacterFromList(index);
+        if (mainCharacter)
+        {
+            GameController.instance.GameOver();
+            yield break;
+        }
+        else
+        {
+            GameController.instance.RemoveCharacterFromList(index);
+        }
         index = -1;
         addedToList = false;
         while (!IsOnTheGround())

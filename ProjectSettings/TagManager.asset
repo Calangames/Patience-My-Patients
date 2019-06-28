@@ -11,6 +11,7 @@ TagManager:
   - FloorButton
   - Elevator
   - ExitArea
+  - Exit
   layers:
   - Default
   - TransparentFX

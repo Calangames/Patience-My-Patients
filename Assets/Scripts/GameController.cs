@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     {
         selectedCharacter = teamCharacters[selectedIndex];
         selectedCharacter.Selected(true);
+        selectedCharacter.MainCharacter(true);
         selectedCharacter.AddedToList(true);
     }
 	
@@ -77,10 +78,7 @@ public class GameController : MonoBehaviour
         teamCharacters.RemoveAt(index);
         if (teamCharacters.Count <= 0)
         {
-            selectedCharacter = null;
-            SoundController.instance.gameOver.pitch = Random.Range(0.99f, 1.01f);
-            SoundController.instance.gameOver.Play();
-            Invoke("GameOver", 0.2f);
+
             return;
         }
         else
@@ -138,7 +136,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void GameOver()
+    public void GameOver()
+    {
+        selectedCharacter = null;
+        SoundController.instance.gameOver.pitch = Random.Range(0.99f, 1.01f);
+        SoundController.instance.gameOver.Play();
+        Invoke("GoToMenu", 0.2f);
+    }
+
+    public void GoToMenu()
     {
         SceneManager.LoadScene(0);
     }

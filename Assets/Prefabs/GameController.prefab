@@ -59,6 +59,14 @@ MonoBehaviour:
   - lever: {fileID: 0}
     obstacles:
     - {fileID: 0}
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
   - lever: {fileID: 0}
     obstacles:
     - {fileID: 0}
@@ -68,6 +76,39 @@ MonoBehaviour:
     - {fileID: 0}
   - lever: {fileID: 0}
     obstacles:
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+  - lever: {fileID: 0}
+    obstacles:
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
   - lever: {fileID: 0}
