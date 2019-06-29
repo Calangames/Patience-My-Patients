@@ -74,6 +74,16 @@ public class EndingController : MonoBehaviour
         StartCoroutine(WaitUntilCompleted());
     }
 
+    public void CrossfadeToEnding()
+    {
+        SoundController.instance.Crossfade(SoundController.instance.game, SoundController.instance.ending);
+    }
+
+    public void CrossfadeToMenu()
+    {
+        SoundController.instance.Crossfade(SoundController.instance.ending, SoundController.instance.menu);
+    }
+
     public void GoToMenu()
     {
         GameController.instance.GoToMenu();
