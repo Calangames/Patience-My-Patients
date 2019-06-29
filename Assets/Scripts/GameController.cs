@@ -138,6 +138,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        SoundController.instance.Crossfade(SoundController.instance.game, SoundController.instance.menu);
         selectedCharacter = null;
         SoundController.instance.gameOver.pitch = Random.Range(0.99f, 1.01f);
         SoundController.instance.gameOver.Play();

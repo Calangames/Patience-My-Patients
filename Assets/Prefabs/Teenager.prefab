@@ -125,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1630747130777338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 99.91, y: 11.8, z: 0}
+  m_LocalPosition: {x: 100.9, y: 12.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4325681731841692}
@@ -250,7 +250,9 @@ MonoBehaviour:
   horizontalSpeed: 6
   jumpSpeed: 6
   horizontalDecelerationRate: 0.5
-  stepsPitch: 1
+  stepsPitch: 0.5
+  jumpPitch: 0.5
+  endingImage: {fileID: 0}
   blindnessSprite: {fileID: 212836159702272224}
 --- !u!212 &212699820869043542
 SpriteRenderer:
