@@ -31,6 +31,11 @@ public class Character : MonoBehaviour
         addedToList = value;
     }
 
+    public bool MainCharacter()
+    {
+        return mainCharacter;
+    }
+
     public void MainCharacter(bool value)
     {
         mainCharacter = value;
@@ -214,10 +219,16 @@ public class Character : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
                     {
-                        if (!endingGame)
+                        foreach (Character character in EndingController.instance.ArrivedCharacters())
                         {
-                            endingGame = true;
-                            EndingController.instance.End();
+                            if (character.mainCharacter)
+                            {
+                                if (!endingGame)
+                                {
+                                    endingGame = true;
+                                    EndingController.instance.End();
+                                }
+                            }
                         }
                     }
                 }
