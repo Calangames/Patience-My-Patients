@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EndingController : MonoBehaviour
 {
+    [Range(0.1f, 1f)]
+    public float nonEndingFadeDuration = 0.5f;
+    public SpriteRenderer gameoverFade;
     [TextArea(1, 10)]
     public string goodEnding, averageEnding, badEnding;
 
@@ -86,6 +89,7 @@ public class EndingController : MonoBehaviour
 
     public void GoToMenu()
     {
+        FadeController.instance.White(true);
         GameController.instance.GoToMenu();
     }
 
