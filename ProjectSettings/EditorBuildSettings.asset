@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: fd093c5818bc30a4586ffadb2c5abb6a
   - enabled: 1
-    path: "Assets/Scenes/Game 1 copia com mudan\xE7as 1.unity"
+    path: Assets/Scenes/Game.unity
     guid: a32adf88bfd56f34da914fa1ac9a1fbb

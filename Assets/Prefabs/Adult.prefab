@@ -250,8 +250,9 @@ MonoBehaviour:
   horizontalSpeed: 2
   jumpSpeed: 7
   horizontalDecelerationRate: 0.5
-  stepsPitch: 0.3
-  jumpPitch: 0.7
+  stepsPitch: 0.4
+  jumpPitch: 0.5
+  endingImage: {fileID: 0}
   blindnessSprite: {fileID: 212023380391238298}
 --- !u!212 &212023380391238298
 SpriteRenderer:

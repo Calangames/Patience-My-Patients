@@ -40,6 +40,7 @@ public class MenuController : MonoBehaviour
 
     public void StartButton()
     {
+        SoundController.instance.Crossfade(SoundController.instance.menu, SoundController.instance.game);
         SceneManager.LoadScene(1);
     }
 

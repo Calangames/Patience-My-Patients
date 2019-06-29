@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     private float horizontalForce = 0f, horizontalAcceleration = 0f;
-    private bool mainCharacter = false, selected = false, addedToList = false, dead = false, canJump = true, ridingElevator = false;
+    private bool mainCharacter = false, selected = false, addedToList = false, dead = false, canJump = true, ridingElevator = false, endingGame = false;
     private int index = 0;
     private WaitForSeconds timer = new WaitForSeconds(0.3f);
 
@@ -92,6 +92,10 @@ public class Character : MonoBehaviour
         _animator.SetBool("Dead", dead);
         if (selected && !dead)
         {
+            if (endingGame)
+            {
+                return;
+            }
             if (!ridingElevator)
             {
                 float hInputRaw = Input.GetAxisRaw("Horizontal");
@@ -115,6 +119,16 @@ public class Character : MonoBehaviour
     {
         if (selected)
         {
+            if (endingGame)
+            {
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SoundController.instance.Crossfade(SoundController.instance.game, SoundController.instance.menu);
+                GameController.instance.GoToMenu();
+                return;
+            }
             if (!dead && !ridingElevator)
             {
                 if (Input.GetAxisRaw("Horizontal") != 0f)
@@ -200,9 +214,9 @@ public class Character : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
                     {
-                        if (!ridingElevator)
+                        if (!endingGame)
                         {
-                            ridingElevator = true;
+                            endingGame = true;
                             EndingController.instance.End();
                         }
                     }
