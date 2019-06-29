@@ -25,29 +25,50 @@ public class GameController : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        selectedCharacter = teamCharacters[selectedIndex];
-        selectedCharacter.Selected(true);
-        selectedCharacter.MainCharacter(true);
-        selectedCharacter.AddedToList(true);
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && selectedCharacter.IsOnTheGround())
+        if (FadeController.instance.Black())
         {
-            selectedIndex++;
-            if (selectedIndex >= teamCharacters.Count)
-            {
-                selectedIndex = 0;
-            }
-            selectedCharacter.Selected(false);
+            StartCoroutine(StartFade());
+        }
+        else
+        {
             selectedCharacter = teamCharacters[selectedIndex];
             selectedCharacter.Selected(true);
+            selectedCharacter.MainCharacter(true);
+            selectedCharacter.AddedToList(true);
         }
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (selectedCharacter && selectedCharacter.IsOnTheGround())
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                selectedIndex++;
+                if (selectedIndex >= teamCharacters.Count)
+                {
+                    selectedIndex = 0;
+                }
+                selectedCharacter.Selected(false);
+                selectedCharacter = teamCharacters[selectedIndex];
+                selectedCharacter.Selected(true);
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                selectedIndex--;
+                if (selectedIndex < 0)
+                {
+                    selectedIndex = teamCharacters.Count - 1;
+                }
+                selectedCharacter.Selected(false);
+                selectedCharacter = teamCharacters[selectedIndex];
+                selectedCharacter.Selected(true);
+            }
+        }
+    }
 
     public void AddCharacterToList(Character newCharacter)
     {
@@ -142,12 +163,43 @@ public class GameController : MonoBehaviour
         selectedCharacter = null;
         SoundController.instance.gameOver.pitch = Random.Range(0.99f, 1.01f);
         SoundController.instance.gameOver.Play();
-        Invoke("GoToMenu", 0.2f);
+        FadeController.instance.Black(true);
+        StartCoroutine(GameoverFade());
     }
 
     public void GoToMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    private IEnumerator StartFade()
+    {
+        EndingController.instance.gameoverFade.color = Color.black;
+        yield return null;
+        float alpha = 1f;
+        while (alpha > 0f)
+        {
+            alpha -= (Time.deltaTime / EndingController.instance.nonEndingFadeDuration);
+            EndingController.instance.gameoverFade.color = new Color(0f, 0f, 0f, alpha);
+            yield return null;
+        }
+        FadeController.instance.Black(false);
+        selectedCharacter = teamCharacters[selectedIndex];
+        selectedCharacter.Selected(true);
+        selectedCharacter.MainCharacter(true);
+        selectedCharacter.AddedToList(true);
+    }
+
+    private IEnumerator GameoverFade()
+    {
+        float alpha = 0f;
+        while (alpha < 1f)
+        {
+            alpha += (Time.deltaTime / EndingController.instance.nonEndingFadeDuration);
+            EndingController.instance.gameoverFade.color = new Color(0f, 0f, 0f, alpha);
+            yield return null;
+        }
+        Invoke("GoToMenu", 0.2f);
     }
 }
 

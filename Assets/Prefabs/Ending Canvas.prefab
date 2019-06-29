@@ -557,6 +557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c98a659df53940945ab45b777b358a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameoverFadeDuration: 0.5
+  gameoverFade: {fileID: 0}
   goodEnding: "All right, everyone well? We are finally safe, but the hospital has
     fallen... unfortunately there must \r\nbe several people who could not leave...
     from patients to doctors. But I\u2019m glad we saved everyone we could\r.\nSomeone,
