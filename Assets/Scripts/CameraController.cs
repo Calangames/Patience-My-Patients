@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour
     private float xCameraExtent, yCameraExtent, aspectRatio, startingOrthographicSize, currentWidth, currentHeight, currentAspect, targetAspect;
     private Vector3 newPos;
     private GameObject player;
+    private float secondaryCameraRatio;
 
     private const float PixelSize = 1f / 32f; //0.03125f
 
@@ -34,6 +35,10 @@ public class CameraController : MonoBehaviour
 #endif
         startingOrthographicSize = mainCamera.orthographicSize;
         targetAspect = targetResolution.x / targetResolution.y;
+        if (secondaryCamera)
+        {
+            secondaryCameraRatio = secondaryCamera.orthographicSize / mainCamera.orthographicSize;
+        }
         ResizeCamera();
     }
 
@@ -96,7 +101,7 @@ public class CameraController : MonoBehaviour
         mainCamera.orthographicSize = startingOrthographicSize * targetAspect / currentAspect;
         if (secondaryCamera)
         {
-            secondaryCamera.orthographicSize = mainCamera.orthographicSize;
+            secondaryCamera.orthographicSize = mainCamera.orthographicSize * secondaryCameraRatio;
         }
     }
 }
