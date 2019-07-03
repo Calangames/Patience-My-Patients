@@ -29,6 +29,11 @@ public class EndingController : MonoBehaviour
 
     }
 
+    public List<Character> ArrivedCharacters()
+    {
+        return arrivedCharacters;
+    }
+
     public void ActivateCharactersEnding()
     {
         foreach (Character character in arrivedCharacters)
