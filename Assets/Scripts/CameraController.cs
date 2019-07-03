@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     public Vector2 targetResolution;
     public float heightInWorldUnits = 9f, widthInWorldUnits = 16f;
     public Vector3 cameraOffset;
+    public Camera secondaryCamera;
 
 #if UNITY_WEBGL
     private bool fullScreen = false;
@@ -20,7 +21,8 @@ public class CameraController : MonoBehaviour
     private float xCameraExtent, yCameraExtent, aspectRatio, startingOrthographicSize, currentWidth, currentHeight, currentAspect, targetAspect;
     private Vector3 newPos;
     private GameObject player;
-    private float snap = 1f / 32f; //0.03125f
+
+    private const float PixelSize = 1f / 32f; //0.03125f
 
     // Use this for initialization
     void Start()
@@ -57,8 +59,8 @@ public class CameraController : MonoBehaviour
         {
             return;
         }
-        float newX = Mathf.Round((player.transform.position.x + cameraOffset.x) / snap) / 32f;
-        float newY = Mathf.Round((player.transform.position.y + cameraOffset.y) / snap) / 32f;
+        float newX = Mathf.Round((player.transform.position.x + cameraOffset.x) / PixelSize) * PixelSize;
+        float newY = Mathf.Round((player.transform.position.y + cameraOffset.y) / PixelSize) * PixelSize;
         newPos = new Vector3(newX, newY, cameraOffset.z);
         transform.position = Vector3.MoveTowards(transform.position, newPos, 100f);
     }
@@ -80,14 +82,21 @@ public class CameraController : MonoBehaviour
         currentHeight = (float)mainCamera.pixelHeight;
 #endif
         currentAspect = currentWidth / currentHeight;
-        if (mainCamera.aspect >= targetAspect)
+        if (perfectPixelCamera)
         {
-            perfectPixelCamera.TexturePixelsPerWorldUnit = Mathf.CeilToInt(currentHeight / heightInWorldUnits);
-        }
-        else
-        {
-            perfectPixelCamera.TexturePixelsPerWorldUnit = Mathf.CeilToInt(currentWidth / widthInWorldUnits);
+            if (mainCamera.aspect >= targetAspect)
+            {
+                perfectPixelCamera.TexturePixelsPerWorldUnit = Mathf.CeilToInt(currentHeight / heightInWorldUnits);
+            }
+            else
+            {
+                perfectPixelCamera.TexturePixelsPerWorldUnit = Mathf.CeilToInt(currentWidth / widthInWorldUnits);
+            }
         }
         mainCamera.orthographicSize = startingOrthographicSize * targetAspect / currentAspect;
+        if (secondaryCamera)
+        {
+            secondaryCamera.orthographicSize = mainCamera.orthographicSize;
+        }
     }
 }
