@@ -27,6 +27,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1078597748633512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4173845529846430}
+  - component: {fileID: 212009765777111078}
+  - component: {fileID: 95243612255803614}
+  m_Layer: 2
+  m_Name: Character Sprite Medic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1228120861965260
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,10 +52,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4113061638714428}
-  - component: {fileID: 212249864374032802}
   - component: {fileID: 61904282536881294}
   - component: {fileID: 50865933936852620}
-  - component: {fileID: 95882455412059242}
   - component: {fileID: 114089649091345702}
   m_Layer: 2
   m_Name: Medic
@@ -65,7 +80,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1754316989407702
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -73,7 +88,7 @@ GameObject:
   - component: {fileID: 4628379560841492}
   - component: {fileID: 212603019386416992}
   m_Layer: 2
-  m_Name: Crappy Eyes medic
+  m_Name: Crappy Eyes Medic
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,14 +101,28 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1228120861965260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 79.096596, y: 17.0037, z: 0}
+  m_LocalPosition: {x: -5.7, y: -0.9963009, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4969702476890012}
   - {fileID: 4822385332938442}
-  - {fileID: 4628379560841492}
+  - {fileID: 4173845529846430}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4173845529846430
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1078597748633512}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4628379560841492}
+  m_Father: {fileID: 4113061638714428}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4628379560841492
 Transform:
@@ -102,11 +131,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1754316989407702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4113061638714428}
-  m_RootOrder: 2
+  m_Father: {fileID: 4173845529846430}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4822385332938442
 Transform:
@@ -219,13 +248,13 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0125383735, y: 0.31536126}
   m_Size: {x: 6.39, y: 0.6998122}
   m_Direction: 0
---- !u!95 &95882455412059242
+--- !u!95 &95243612255803614
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1228120861965260}
+  m_GameObject: {fileID: 1078597748633512}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 140b284157150bb4dba48d1e981266ae, type: 2}
@@ -254,12 +283,13 @@ MonoBehaviour:
   jumpPitch: 0.5
   endingImage: {fileID: 0}
   blindnessSprite: {fileID: 212603019386416992}
---- !u!212 &212249864374032802
+  characterSprite: {fileID: 4173845529846430}
+--- !u!212 &212009765777111078
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1228120861965260}
+  m_GameObject: {fileID: 1078597748633512}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -287,7 +317,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300008, guid: f9ba404d55b29bb4993434d9261a6a01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -331,7 +361,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 22
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 73b795a0ae6d6f84b80728d3e01e3f8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
