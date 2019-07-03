@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     public float jumpPitch = 1f;
     public Image endingImage;
     public SpriteRenderer blindnessSprite;
+    public Transform characterSprite;
 
     private Rigidbody2D _rigidbody2d;
     private SpriteRenderer _spriteRenderer;
@@ -26,9 +27,16 @@ public class Character : MonoBehaviour
     private int index = 0;
     private WaitForSeconds timer = new WaitForSeconds(0.3f);
 
+    private const float PixelSize = 1 / 32f;
+
     public void AddedToList(bool value)
     {
         addedToList = value;
+    }
+
+    public bool MainCharacter()
+    {
+        return mainCharacter;
     }
 
     public void MainCharacter(bool value)
@@ -56,7 +64,7 @@ public class Character : MonoBehaviour
     {
         if (selected)
         {
-            _spriteRenderer.sortingOrder = 1;
+            _spriteRenderer.sortingOrder = 2;
         }
         else
         {
@@ -82,13 +90,19 @@ public class Character : MonoBehaviour
     void Awake()
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
+        _spriteRenderer = characterSprite.GetComponent<SpriteRenderer>();
+        _animator = characterSprite.GetComponent<Animator>();
         TriggerSelection();
     }
 
     void Update()
     {
+        if (selected)
+        {
+            float newX = Mathf.Round(transform.position.x / PixelSize) * PixelSize;
+            float newY = Mathf.Round(transform.position.y / PixelSize) * PixelSize;
+            characterSprite.position = new Vector3(newX, newY, transform.position.z);
+        }
         _animator.SetBool("Dead", dead);
         if (selected && !dead)
         {
@@ -111,6 +125,19 @@ public class Character : MonoBehaviour
                 {
                     _animator.SetBool("WalkingOrJumping", false);
                 }
+            }
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (!selected && _rigidbody2d.velocity.magnitude > 0f)
+        {
+            if (GameController.instance.SelectedCharacter())
+            {
+                float newX = Mathf.Round((transform.position.x + GameController.instance.SelectedCharacter().characterSprite.transform.localPosition.x) / PixelSize) * PixelSize;
+                float newY = Mathf.Round((transform.position.y + GameController.instance.SelectedCharacter().characterSprite.transform.localPosition.y) / PixelSize) * PixelSize;
+                characterSprite.position = new Vector3(newX, newY, transform.position.z);
             }
         }
     }
@@ -214,10 +241,16 @@ public class Character : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
                     {
-                        if (!endingGame)
+                        foreach (Character character in EndingController.instance.ArrivedCharacters())
                         {
-                            endingGame = true;
-                            EndingController.instance.End();
+                            if (character.mainCharacter)
+                            {
+                                if (!endingGame)
+                                {
+                                    endingGame = true;
+                                    EndingController.instance.End();
+                                }
+                            }
                         }
                     }
                 }
