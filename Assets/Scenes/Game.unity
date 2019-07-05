@@ -317,6 +317,11 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1435558200}
+    - target: {fileID: 223645207286959500, guid: 5df4733429c86054892940ce1ebb57df,
+        type: 2}
+      propertyPath: m_PlaneDistance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5df4733429c86054892940ce1ebb57df, type: 2}
   m_IsPrefabParent: 0
@@ -5638,7 +5643,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: c224a426e4755d64b9b4cb67af57fabe, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 165892eae68b32f49a84d9067fe69241, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -6908,7 +6913,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1435558197}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1129238519}
