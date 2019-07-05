@@ -66,7 +66,7 @@ public class EndingController : MonoBehaviour
 
     public void WriteEnding()
     {
-        int numberOfSurvivers = GameController.instance.teamCharacters.Count;
+        int numberOfSurvivers = arrivedCharacters.Count;
         if (numberOfSurvivers >= 5)
         {
             _typewriter.Write(goodEnding);
