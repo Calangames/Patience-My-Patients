@@ -5593,7 +5593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3070a0f848ec1c84aad93e03b9efc1b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetResolution: {x: 512, y: 288}
+  targetResolution: {x: 800, y: 450}
   heightInWorldUnits: 9
   widthInWorldUnits: 16
   cameraOffset: {x: 0, y: 1, z: -10}
