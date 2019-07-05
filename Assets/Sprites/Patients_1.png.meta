@@ -164,9 +164,9 @@ TextureImporter:
       name: Patients_1_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 138
         y: 0
-        width: 32
+        width: 16
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
