@@ -80,7 +80,10 @@ public class MenuController : MonoBehaviour
         SwapNavigation(exitButton);
         SwapNavigation(creditsButton);
         fade.color = Color.black;
-        yield return null;
+        for (int i = 5; i > 0; i--)
+        {
+            yield return null;
+        }
         float alpha = 1f;
         while (alpha > 0f)
         {
@@ -102,7 +105,10 @@ public class MenuController : MonoBehaviour
         SwapNavigation(exitButton);
         SwapNavigation(creditsButton);
         fade.color = Color.white;
-        yield return null;
+        for (int i = 5; i > 0; i--)
+        {
+            yield return null;
+        }
         float alpha = 1f;
         while (alpha > 0f)
         {

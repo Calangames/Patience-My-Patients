@@ -27,7 +27,11 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (FadeController.instance.Black())
+        if (IntroController.play)
+        {
+            StartCoroutine(WaitForIntro());
+        }
+        else if (FadeController.instance.Black())
         {
             StartCoroutine(StartFade());
         }
@@ -175,7 +179,10 @@ public class GameController : MonoBehaviour
     private IEnumerator StartFade()
     {
         EndingController.instance.gameoverFade.color = Color.black;
-        yield return null;
+        for (int i = 5; i > 0; i--)
+        {
+            yield return null;
+        }
         float alpha = 1f;
         while (alpha > 0f)
         {
@@ -184,6 +191,18 @@ public class GameController : MonoBehaviour
             yield return null;
         }
         FadeController.instance.Black(false);
+        selectedCharacter = teamCharacters[selectedIndex];
+        selectedCharacter.Selected(true);
+        selectedCharacter.MainCharacter(true);
+        selectedCharacter.AddedToList(true);
+    }
+
+    private IEnumerator WaitForIntro()
+    {
+        while (!IntroController.instance.Completed())
+        {
+            yield return null;
+        }
         selectedCharacter = teamCharacters[selectedIndex];
         selectedCharacter.Selected(true);
         selectedCharacter.MainCharacter(true);
