@@ -293,6 +293,7 @@ public class Character : MonoBehaviour
     private IEnumerator Die()
     {
         dead = true;
+        yield return new WaitForSecondsRealtime(0.3f);
         Selected(false);
         if (mainCharacter)
         {
