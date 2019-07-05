@@ -21,7 +21,6 @@ public class CameraController : MonoBehaviour
     private float xCameraExtent, yCameraExtent, aspectRatio, startingOrthographicSize, currentWidth, currentHeight, currentAspect, targetAspect;
     private Vector3 newPos;
     private GameObject player;
-    private float secondaryCameraRatio;
 
     private const float PixelSize = 1f / 32f; //0.03125f
 
@@ -33,12 +32,15 @@ public class CameraController : MonoBehaviour
 #if UNITY_WEBGL
         fullScreen = Screen.fullScreen;
 #endif
-        startingOrthographicSize = mainCamera.orthographicSize;
-        targetAspect = targetResolution.x / targetResolution.y;
         if (secondaryCamera)
         {
-            secondaryCameraRatio = secondaryCamera.orthographicSize / mainCamera.orthographicSize;
+            startingOrthographicSize = secondaryCamera.orthographicSize;
         }
+        else
+        {
+            startingOrthographicSize = mainCamera.orthographicSize;
+        }
+        targetAspect = targetResolution.x / targetResolution.y;
         ResizeCamera();
     }
 
@@ -79,12 +81,28 @@ public class CameraController : MonoBehaviour
             currentHeight = (float)Screen.currentResolution.height;
         }else
         {
+            if (secondaryCamera)
+            {
+                currentWidth = (float)secondaryCamera.pixelWidth;
+                currentHeight = (float)secondaryCamera.pixelHeight;
+            }
+            else
+            {
+                currentWidth = (float)mainCamera.pixelWidth;
+                currentHeight = (float)mainCamera.pixelHeight;
+            }
+        }
+#else
+        if (secondaryCamera)
+        {
+            currentWidth = (float)secondaryCamera.pixelWidth;
+            currentHeight = (float)secondaryCamera.pixelHeight;
+        }
+        else
+        {
             currentWidth = (float)mainCamera.pixelWidth;
             currentHeight = (float)mainCamera.pixelHeight;
         }
-#else
-        currentWidth = (float)mainCamera.pixelWidth;
-        currentHeight = (float)mainCamera.pixelHeight;
 #endif
         currentAspect = currentWidth / currentHeight;
         if (perfectPixelCamera)
@@ -98,10 +116,13 @@ public class CameraController : MonoBehaviour
                 perfectPixelCamera.TexturePixelsPerWorldUnit = Mathf.CeilToInt(currentWidth / widthInWorldUnits);
             }
         }
-        mainCamera.orthographicSize = startingOrthographicSize * targetAspect / currentAspect;
         if (secondaryCamera)
         {
-            secondaryCamera.orthographicSize = mainCamera.orthographicSize * secondaryCameraRatio;
+            secondaryCamera.orthographicSize = startingOrthographicSize * targetAspect / currentAspect;
+        }
+        else
+        {
+            mainCamera.orthographicSize = startingOrthographicSize * targetAspect / currentAspect;
         }
     }
 }
