@@ -103,13 +103,7 @@ public class GameController : MonoBehaviour
         teamCharacters.RemoveAt(index);
         if (teamCharacters.Count <= 0)
         {
-
             return;
-        }
-        else
-        {
-            SoundController.instance.death.pitch = Random.Range(0.95f, 1.05f);
-            SoundController.instance.death.Play();
         }
         if (index == selectedIndex)
         {
@@ -165,8 +159,6 @@ public class GameController : MonoBehaviour
     {
         SoundController.instance.Crossfade(SoundController.instance.game, SoundController.instance.menu);
         selectedCharacter = null;
-        SoundController.instance.gameOver.pitch = Random.Range(0.99f, 1.01f);
-        SoundController.instance.gameOver.Play();
         FadeController.instance.Black(true);
         StartCoroutine(GameoverFade());
     }
