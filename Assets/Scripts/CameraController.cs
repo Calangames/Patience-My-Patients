@@ -8,6 +8,11 @@ public class CameraController : MonoBehaviour
 {
     //[Range(0f, 20f)]
     //public float cameraSpeed = 3f;
+    [Range(0f, 1f)]
+    public float cameraShakeDuration = 0.5f;
+    [Range(0f, 1f)]
+    [Tooltip("In World Units")]
+    public float cameraShakeMagnitude = 0.2f;
     public Vector2 targetResolution;
     public float heightInWorldUnits = 9f, widthInWorldUnits = 16f;
     public Vector3 cameraOffset;
@@ -19,8 +24,10 @@ public class CameraController : MonoBehaviour
     private Camera mainCamera;
     private GGEZ.PerfectPixelCamera perfectPixelCamera;
     private float xCameraExtent, yCameraExtent, aspectRatio, startingOrthographicSize, currentWidth, currentHeight, currentAspect, targetAspect;
+    private Vector2 screenShake = Vector2.zero;
     private Vector3 newPos;
     private GameObject player;
+    private Coroutine shaking;
 
     private const float PixelSize = 1f / 32f; //0.03125f
 
@@ -66,8 +73,8 @@ public class CameraController : MonoBehaviour
         {
             return;
         }
-        float newX = Mathf.Round((player.transform.position.x + cameraOffset.x) / PixelSize) * PixelSize;
-        float newY = Mathf.Round((player.transform.position.y + cameraOffset.y) / PixelSize) * PixelSize;
+        float newX = Mathf.Round((player.transform.position.x + cameraOffset.x + screenShake.x) / PixelSize) * PixelSize;
+        float newY = Mathf.Round((player.transform.position.y + cameraOffset.y + screenShake.y) / PixelSize) * PixelSize;
         newPos = new Vector3(newX, newY, cameraOffset.z);
         transform.position = Vector3.MoveTowards(transform.position, newPos, 100f);
     }
@@ -124,5 +131,27 @@ public class CameraController : MonoBehaviour
         {
             mainCamera.orthographicSize = startingOrthographicSize * targetAspect / currentAspect;
         }
+    }
+
+    public void Shake()
+    {
+        if (shaking != null)
+        {
+            StopCoroutine(shaking);
+        }
+        shaking = StartCoroutine(ShakeCoroutine(cameraShakeDuration, cameraShakeMagnitude));
+    }
+
+    private IEnumerator ShakeCoroutine(float duration, float magnitude)
+    {
+        float decayRate = magnitude / duration;
+        while (duration > 0)
+        {
+            duration -= Time.deltaTime;
+            screenShake = Random.insideUnitCircle * magnitude;
+            magnitude -= (Time.deltaTime * decayRate);
+            yield return null;
+        }
+        screenShake = Vector2.zero;
     }
 }

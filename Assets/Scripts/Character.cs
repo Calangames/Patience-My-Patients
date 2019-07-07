@@ -22,6 +22,7 @@ public class Character : MonoBehaviour
     private Rigidbody2D _rigidbody2d;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
+    private CameraController _cameraController;
     private float horizontalForce = 0f, horizontalAcceleration = 0f;
     private bool mainCharacter = false, selected = false, addedToList = false, dead = false, canJump = true, ridingElevator = false, endingGame = false;
     private int index = 0;
@@ -92,6 +93,7 @@ public class Character : MonoBehaviour
         _rigidbody2d = GetComponent<Rigidbody2D>();
         _spriteRenderer = characterSprite.GetComponent<SpriteRenderer>();
         _animator = characterSprite.GetComponent<Animator>();
+        _cameraController = Camera.main.GetComponent<CameraController>();
         TriggerSelection();
     }
 
@@ -211,6 +213,7 @@ public class Character : MonoBehaviour
         }
         else if (other.CompareTag("Water"))
         {
+            _cameraController.Shake();
             StartCoroutine(Die());
         }
         else if (other.CompareTag("ExitArea"))
@@ -293,15 +296,20 @@ public class Character : MonoBehaviour
     private IEnumerator Die()
     {
         dead = true;
-        yield return new WaitForSecondsRealtime(0.3f);
         Selected(false);
         if (mainCharacter)
         {
+            SoundController.instance.gameOver.pitch = Random.Range(0.99f, 1.01f);
+            SoundController.instance.gameOver.Play();
+            yield return new WaitForSecondsRealtime(0.5f);
             GameController.instance.GameOver();
             yield break;
         }
         else
         {
+            SoundController.instance.death.pitch = Random.Range(0.95f, 1.05f);
+            SoundController.instance.death.Play();
+            yield return new WaitForSecondsRealtime(0.3f);
             GameController.instance.RemoveCharacterFromList(index);
         }
         index = -1;
