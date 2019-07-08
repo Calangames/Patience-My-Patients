@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
     private Animator _animator;
     private CameraController _cameraController;
     private float horizontalForce = 0f, horizontalAcceleration = 0f;
-    private bool mainCharacter = false, selected = false, addedToList = false, dead = false, canJump = true, ridingElevator = false, endingGame = false;
+    private bool mainCharacter = false, selected = false, addedToList = false, dead = false, canJump = true, transitioning = false;
     private int index = 0;
     private WaitForSeconds timer = new WaitForSeconds(0.3f);
 
@@ -56,9 +56,9 @@ public class Character : MonoBehaviour
         index = updatedIndex;
     }
 
-    public void RidingElevator(bool b)
+    public void Transitioning(bool b)
     {
-        ridingElevator = b;
+        transitioning = b;
     }
 
     private void TriggerSelection()
@@ -108,11 +108,7 @@ public class Character : MonoBehaviour
         _animator.SetBool("Dead", dead);
         if (selected && !dead)
         {
-            if (endingGame)
-            {
-                return;
-            }
-            if (!ridingElevator)
+            if (!transitioning)
             {
                 float hInputRaw = Input.GetAxisRaw("Horizontal");
                 if (Input.GetAxisRaw("Jump") > 0f || hInputRaw != 0f)
@@ -146,19 +142,15 @@ public class Character : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (selected)
+        if (selected && !transitioning)
         {
-            if (endingGame)
-            {
-                return;
-            }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 SoundController.instance.Crossfade(SoundController.instance.game, SoundController.instance.menu);
                 GameController.instance.GoToMenu();
                 return;
             }
-            if (!dead && !ridingElevator)
+            if (!dead)
             {
                 if (Input.GetAxisRaw("Horizontal") != 0f)
                 {
@@ -202,13 +194,18 @@ public class Character : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !selected)
+        if (other.CompareTag("Player"))
         {
-            if (!addedToList && !dead)
+            if (!selected && !addedToList && !dead)
             {
                 GameController.instance.AddCharacterToList(this);
                 index = GameController.instance.teamCharacters.Count - 1;
                 addedToList = true;
+            }
+            if (mainCharacter && !Dialogue.started)
+            {
+                _animator.SetBool("WalkingOrJumping", false);
+                Dialogue.instance.Begin();
             }
         }
         else if (other.CompareTag("Water"))
@@ -232,13 +229,10 @@ public class Character : MonoBehaviour
                 {
                     GameController.instance.ActivateLever(other.GetComponent<Lever>().GetInstanceID());
                 }
-                else if (other.CompareTag("Elevator"))
+                else if (other.CompareTag("Elevator") && !transitioning)
                 {
-                    if (!ridingElevator)
-                    {
-                        ridingElevator = true;
-                        other.GetComponent<Elevator>().Fade();
-                    }
+                    transitioning = true;
+                    other.GetComponent<Elevator>().Fade();
                 }
                 else if (other.CompareTag("Exit"))
                 {
@@ -246,13 +240,10 @@ public class Character : MonoBehaviour
                     {
                         foreach (Character character in EndingController.instance.ArrivedCharacters())
                         {
-                            if (character.mainCharacter)
+                            if (character.mainCharacter && !transitioning)
                             {
-                                if (!endingGame)
-                                {
-                                    endingGame = true;
-                                    EndingController.instance.End();
-                                }
+                                transitioning = true;
+                                EndingController.instance.End();
                             }
                         }
                     }
