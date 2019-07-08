@@ -215,8 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1e93403a44bfd4dbc2abc6d1fb8247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monologue: Emergency shutdown? It's so dark, how do I even get to the exit now?
-    I have to leave immediately!
+  monologue: "Emergency shutdown?      \nIt's so dark, how do I even get to the exit
+    now?       \nI have to leave immediately!     "
 --- !u!114 &114885618044059472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -237,7 +237,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: fe1965e08f4b409418f6133205d7e9ef, type: 3}
+    m_Font: {fileID: 12800000, guid: 540ed88af6e08ad42933cb4460780305, type: 3}
     m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
