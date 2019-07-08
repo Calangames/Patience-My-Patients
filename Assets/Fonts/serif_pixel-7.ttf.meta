@@ -1,21 +1,21 @@
 fileFormatVersion: 2
-guid: fe1965e08f4b409418f6133205d7e9ef
-timeCreated: 1561707856
+guid: 540ed88af6e08ad42933cb4460780305
+timeCreated: 1562549031
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 5
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Georgia
+  fontName: Serif Pixel-7
   fontNames:
-  - Georgia
+  - Serif Pixel-7
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 3
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   userData: 

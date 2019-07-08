@@ -317,6 +317,37 @@ Prefab:
       propertyPath: gameoverFade
       value: 
       objectReference: {fileID: 1362678764}
+    - target: {fileID: 114565554437835152, guid: 5df4733429c86054892940ce1ebb57df,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 540ed88af6e08ad42933cb4460780305,
+        type: 3}
+    - target: {fileID: 114824789317701314, guid: 5df4733429c86054892940ce1ebb57df,
+        type: 2}
+      propertyPath: goodEnding
+      value: "All right, everyone well?     \nWe are finally safe, but the hospital
+        has fallen...    \nUnfortunately there must \r\nbe several people who could
+        not leave...     \nFrom patients to doctors. But I\u2019m glad we saved everyone
+        we could\r.    \nSomeone, please help, there\u2019s people alive here.\r    "
+      objectReference: {fileID: 0}
+    - target: {fileID: 114824789317701314, guid: 5df4733429c86054892940ce1ebb57df,
+        type: 2}
+      propertyPath: averageEnding
+      value: "It's finished... We lived.     \nThe hospital is gone and with it, all
+        hope that anyone else survived. \r    \nWe did what was necessary.     \nIf
+        only we could have saved their lives.\r    \nI\u2019m glad that at least there
+        is someone else alive here.\r    "
+      objectReference: {fileID: 0}
+    - target: {fileID: 114824789317701314, guid: 5df4733429c86054892940ce1ebb57df,
+        type: 2}
+      propertyPath: badEnding
+      value: "Alright... I'm alive.    \nAs a doctor for years at this hospital...
+        \    \nI\u2019ve seen too many people die...  \r    \nIt\u2019s not that different.
+        \    \nAll the people that wanted to leave...     \nIn the end, they were
+        all doomed anyway\r.\nI needed to survive. It was no use saving them.    \nThere
+        was never any life here.\r"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5df4733429c86054892940ce1ebb57df, type: 2}
   m_IsPrefabParent: 0
@@ -5593,6 +5624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3070a0f848ec1c84aad93e03b9efc1b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShakeDuration: 0.5
+  cameraShakeMagnitude: 0.2
   targetResolution: {x: 800, y: 450}
   heightInWorldUnits: 9
   widthInWorldUnits: 16
@@ -6263,6 +6296,18 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1435558200}
+    - target: {fileID: 114885618044059472, guid: 4529f636f6e6ba948b58cfcc418c6f0f,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 540ed88af6e08ad42933cb4460780305,
+        type: 3}
+    - target: {fileID: 114723671447426090, guid: 4529f636f6e6ba948b58cfcc418c6f0f,
+        type: 2}
+      propertyPath: monologue
+      value: "Emergency shutdown?      \nIt's so dark, how do I even get to the exit
+        now?       \nI have to leave immediately!     "
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4529f636f6e6ba948b58cfcc418c6f0f, type: 2}
   m_IsPrefabParent: 0
