@@ -1,21 +1,21 @@
 fileFormatVersion: 2
-guid: fe1965e08f4b409418f6133205d7e9ef
-timeCreated: 1561707856
+guid: 0049111c4bc2f0f45ae951795a81314a
+timeCreated: 1562549042
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 5
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Georgia
+  fontName: pixelmix
   fontNames:
-  - Georgia
+  - pixelmix
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 3
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   userData: 

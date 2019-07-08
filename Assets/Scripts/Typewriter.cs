@@ -13,7 +13,7 @@ public class Typewriter : MonoBehaviour
 	private char[] charArray;
 	private WaitForSeconds delay;
 	private IEnumerator coroutine;
-	private bool completedTyping = false;
+	private bool completedTyping = true, skiped = false;
 
 	// Use this for initialization
 	void Start () 
@@ -21,28 +21,46 @@ public class Typewriter : MonoBehaviour
 		delay = new WaitForSeconds ( typingSpeed == 0f ? 0f: 1f/typingSpeed);
 	}
 
-	public bool Completed()
+    void Update()
+    {
+        if (!completedTyping && !skiped)
+        {
+            skiped = Input.anyKeyDown;
+        }
+    }
+
+    public bool Completed()
 	{
 		return completedTyping;
 	}
 
-	public void Write(string ending)
+	public void Write(string fullText, bool canSkip = false)
 	{
 		completedTyping = false;
-		coroutine = TypeText (ending);
+		coroutine = TypeText (fullText, canSkip);
 		StartCoroutine (coroutine);
 	}
 
-	private IEnumerator TypeText(string ending)
+	private IEnumerator TypeText(string fullText, bool canSkip)
 	{
-		charArray = ending.ToCharArray ();
+		charArray = fullText.ToCharArray ();
 		text.text = "";
 
 		foreach (char letter in charArray)
         {
-			yield return delay;
-            text.text += letter;
+            if (canSkip && skiped)
+            {
+                text.text = fullText;
+                completedTyping = true;
+                skiped = false;
+                StopCoroutine(coroutine);
+            }
+            else
+            {
+                yield return delay;
+                text.text += letter;
+            }
         }
-		completedTyping = true;
-	}
+        completedTyping = true;
+    }
 }
