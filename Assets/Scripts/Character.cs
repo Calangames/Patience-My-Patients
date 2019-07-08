@@ -146,6 +146,8 @@ public class Character : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                Dialogue.started = false;
+                IntroController.play = true;
                 SoundController.instance.Crossfade(SoundController.instance.game, SoundController.instance.menu);
                 GameController.instance.GoToMenu();
                 return;
