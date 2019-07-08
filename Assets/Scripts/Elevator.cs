@@ -32,6 +32,6 @@ public class Elevator : MonoBehaviour
             fade.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
-        GameController.instance.SelectedCharacter().RidingElevator(false);
+        GameController.instance.SelectedCharacter().Transitioning(false);
     }
 }
