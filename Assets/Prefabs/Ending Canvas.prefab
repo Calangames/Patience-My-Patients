@@ -404,7 +404,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: fe1965e08f4b409418f6133205d7e9ef, type: 3}
+    m_Font: {fileID: 12800000, guid: 540ed88af6e08ad42933cb4460780305, type: 3}
     m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
@@ -559,18 +559,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nonEndingFadeDuration: 0.5
   gameoverFade: {fileID: 0}
-  goodEnding: "All right, everyone well? We are finally safe, but the hospital has
-    fallen... unfortunately there must \r\nbe several people who could not leave...
-    from patients to doctors. But I\u2019m glad we saved everyone we could\r.\nSomeone,
-    please help, there\u2019s people alive here.\r"
-  averageEnding: "It's finished... We lived. The hospital is gone and with it, all
-    hope that anyone else survived. \r\nWe did what was necessary. If only we could
-    have saved their lives.\r\nI\u2019m glad that at least there is someone else alive
-    here.\r"
-  badEnding: "Alright... I'm alive. As a doctor for years at this hospital... I\u2019ve
-    seen too many people die...  \r\nIt\u2019s not that different. All the people
-    that wanted to leave... In the end, they were all doomed anyway\r.\nI needed to
-    survive. It was no use saving them.\nThere was never any life here.\r"
+  goodEnding: "All right, everyone well?     \nWe are finally safe, but the hospital
+    has fallen...    \nUnfortunately there must \r\nbe several people who could not
+    leave...     \nFrom patients to doctors. But I\u2019m glad we saved everyone we
+    could\r.    \nSomeone, please help, there\u2019s people alive here.\r    "
+  averageEnding: "It's finished... We lived.     \nThe hospital is gone and with it,
+    all hope that anyone else survived. \r    \nWe did what was necessary.     \nIf
+    only we could have saved their lives.\r    \nI\u2019m glad that at least there
+    is someone else alive here.\r    "
+  badEnding: "Alright... I'm alive.    \nAs a doctor for years at this hospital...
+    \    \nI\u2019ve seen too many people die...  \r    \nIt\u2019s not that different.
+    \    \nAll the people that wanted to leave...     \nIn the end, they were all
+    doomed anyway\r.\nI needed to survive. It was no use saving them.    \nThere was
+    never any life here.\r"
 --- !u!114 &114916609537688046
 MonoBehaviour:
   m_ObjectHideFlags: 1
