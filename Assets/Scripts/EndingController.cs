@@ -62,6 +62,8 @@ public class EndingController : MonoBehaviour
     public void End()
     {
         _animator.SetTrigger("Start Ending");
+        Dialogue.started = false;
+        IntroController.play = true;
     }
 
     public void WriteEnding()
