@@ -559,10 +559,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nonEndingFadeDuration: 0.5
   gameoverFade: {fileID: 0}
-  goodEnding: "All right, everyone well?     \nWe are finally safe, but the hospital
-    has fallen...    \nUnfortunately there must \r\nbe several people who could not
-    leave...     \nFrom patients to doctors. But I\u2019m glad we saved everyone we
-    could\r.    \nSomeone, please help, there\u2019s people alive here.\r    "
+  goodEnding: "All right, is everyone okay?\nI know it was tough, but don't worry,
+    we are safe now.\nLet\u2019s get out of here before this building collapses."
   averageEnding: "It's finished... We lived.     \nThe hospital is gone and with it,
     all hope that anyone else survived. \r    \nWe did what was necessary.     \nIf
     only we could have saved their lives.\r    \nI\u2019m glad that at least there
